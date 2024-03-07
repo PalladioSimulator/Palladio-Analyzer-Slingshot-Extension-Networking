@@ -22,6 +22,7 @@ public class NetworkingModule extends AbstractSlingshotExtension {
 			e.printStackTrace();
 		}
 		install(EventMessageDispatcher.class);
+		bind(SimulationEventBuffer.class);
 	}
 
 }

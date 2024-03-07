@@ -9,9 +9,12 @@ import javax.inject.Singleton;
 import org.apache.log4j.Logger;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+import org.palladiosimulator.analyzer.slingshot.common.events.DESEvent;
 import org.palladiosimulator.analyzer.slingshot.common.events.SystemEvent;
 import org.palladiosimulator.analyzer.slingshot.core.Slingshot;
+import org.palladiosimulator.analyzer.slingshot.core.api.SimulationDriver;
 import org.palladiosimulator.analyzer.slingshot.core.api.SystemDriver;
+import org.palladiosimulator.analyzer.slingshot.networking.SimulationEventBuffer;
 
 
 @Singleton
@@ -19,9 +22,12 @@ public class SlingshotWebsocketClient extends WebSocketClient {
 	private static final Logger LOGGER = Logger.getLogger(SlingshotWebsocketClient.class.getName());
 	private static final int RECONNECT_DELAY = 5000;
 	private SystemDriver systemDriver;
+	private SimulationDriver simulationDriver;
     private final ConcurrentLinkedQueue<String> messageQueue = new ConcurrentLinkedQueue<>();
 	@Inject
 	private GsonProvider gsonProvider;
+	@Inject
+	private SimulationEventBuffer simulationEventBuffer;
 	final Object lock = new Object();
 	private Thread reconnectionThread = new Thread(() -> {
 		if(this.isOpen()) {
@@ -84,8 +90,13 @@ public class SlingshotWebsocketClient extends WebSocketClient {
 		System.out.println("MESSAGE: " + arg);
 		try {
 			var message = this.gsonProvider.getGson().fromJson(arg, Message.class);
+			System.out.println(message.getEvent());
+			System.out.println(message.getClass());
 			if(message instanceof SystemEvent eventMessage) {
 				getSystemDriver().postEvent(eventMessage);
+			} else if (message instanceof DESEvent eventMessage) {
+				//getSimulationDriver().scheduleEvent(eventMessage);
+				this.simulationEventBuffer.addMessage(eventMessage);
 			} else {
 				System.out.println("Received Message could not be dispatched, as it is not a EventMessage (Or SystemEvent): " + message);
 				LOGGER.warn("Received Message could not be dispatched, as it is not a EventMessage (Or SystemEvent): " + message);
@@ -93,8 +104,7 @@ public class SlingshotWebsocketClient extends WebSocketClient {
 		} catch(Throwable e) {
 			System.out.println("Error on deserializing message. No event was dispatched" + e);
 			LOGGER.error("Error on deserializing message. No event was dispatched", e);
-		}
-
+		}  
 	}
 
     @Override
@@ -130,5 +140,12 @@ public class SlingshotWebsocketClient extends WebSocketClient {
 			this.systemDriver = Slingshot.getInstance().getSystemDriver();
 		}
 		return this.systemDriver;
+	}
+	
+	private SimulationDriver getSimulationDriver() {
+		if(this.simulationDriver == null) {
+			this.simulationDriver = Slingshot.getInstance().getSimulationDriver();
+		}
+		return this.simulationDriver;
 	}
 }
