@@ -1,4 +1,4 @@
-package org.palladiosimulator.analyzer.slingshot.networking.ws;
+package org.palladiosimulator.analyzer.slingshot.networking.util;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import org.palladiosimulator.analyzer.slingshot.networking.events.Message;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,4 +1,4 @@
-package org.palladiosimulator.analyzer.slingshot.networking;
+package org.palladiosimulator.analyzer.slingshot.networking.util;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;

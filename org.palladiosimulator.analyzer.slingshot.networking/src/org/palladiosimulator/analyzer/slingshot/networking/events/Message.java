@@ -1,4 +1,4 @@
-package org.palladiosimulator.analyzer.slingshot.networking.ws;
+package org.palladiosimulator.analyzer.slingshot.networking.events;
 
 public abstract class Message<T> {
     private final String event;

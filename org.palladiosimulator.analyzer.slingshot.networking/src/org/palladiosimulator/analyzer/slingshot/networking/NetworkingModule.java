@@ -4,9 +4,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.palladiosimulator.analyzer.slingshot.core.extension.AbstractSlingshotExtension;
-import org.palladiosimulator.analyzer.slingshot.networking.ws.EventMessageDispatcher;
-import org.palladiosimulator.analyzer.slingshot.networking.ws.GsonProvider;
-import org.palladiosimulator.analyzer.slingshot.networking.ws.SlingshotWebsocketClient;
+import org.palladiosimulator.analyzer.slingshot.networking.util.EventMessageDispatcher;
+import org.palladiosimulator.analyzer.slingshot.networking.util.GsonProvider;
+import org.palladiosimulator.analyzer.slingshot.networking.util.SimulationEventBuffer;
 
 
 public class NetworkingModule extends AbstractSlingshotExtension {
@@ -23,6 +23,7 @@ public class NetworkingModule extends AbstractSlingshotExtension {
 		}
 		install(EventMessageDispatcher.class);
 		bind(SimulationEventBuffer.class);
+		install(SimulationEventInserter.class);
 	}
 
 }

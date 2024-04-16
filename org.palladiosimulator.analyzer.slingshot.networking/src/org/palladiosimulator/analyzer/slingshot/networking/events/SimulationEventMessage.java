@@ -1,4 +1,4 @@
-package org.palladiosimulator.analyzer.slingshot.networking.ws;
+package org.palladiosimulator.analyzer.slingshot.networking.events;
 
 import java.util.UUID;
 

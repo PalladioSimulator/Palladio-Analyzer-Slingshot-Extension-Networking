@@ -1,4 +1,4 @@
-package org.palladiosimulator.analyzer.slingshot.networking.ws;
+package org.palladiosimulator.analyzer.slingshot.networking;
 
 import java.net.URI;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -14,7 +14,9 @@ import org.palladiosimulator.analyzer.slingshot.common.events.SystemEvent;
 import org.palladiosimulator.analyzer.slingshot.core.Slingshot;
 import org.palladiosimulator.analyzer.slingshot.core.api.SimulationDriver;
 import org.palladiosimulator.analyzer.slingshot.core.api.SystemDriver;
-import org.palladiosimulator.analyzer.slingshot.networking.SimulationEventBuffer;
+import org.palladiosimulator.analyzer.slingshot.networking.events.Message;
+import org.palladiosimulator.analyzer.slingshot.networking.util.GsonProvider;
+import org.palladiosimulator.analyzer.slingshot.networking.util.SimulationEventBuffer;
 
 
 @Singleton
@@ -95,7 +97,6 @@ public class SlingshotWebsocketClient extends WebSocketClient {
 			if(message instanceof SystemEvent eventMessage) {
 				getSystemDriver().postEvent(eventMessage);
 			} else if (message instanceof DESEvent eventMessage) {
-				//getSimulationDriver().scheduleEvent(eventMessage);
 				this.simulationEventBuffer.addMessage(eventMessage);
 			} else {
 				System.out.println("Received Message could not be dispatched, as it is not a EventMessage (Or SystemEvent): " + message);
