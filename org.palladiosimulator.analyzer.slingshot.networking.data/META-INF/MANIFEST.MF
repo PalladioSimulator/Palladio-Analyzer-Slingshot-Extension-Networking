@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.palladiosimulator.analyzer.slingshot.networking.data
+Bundle-SymbolicName: org.palladiosimulator.analyzer.slingshot.networking.data
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: org.palladiosimulator.analyzer.slingshot.networking.data
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Require-Bundle: org.palladiosimulator.analyzer.slingshot.common,
+ javax.inject
+Export-Package: org.palladiosimulator.analyzer.slingshot.networking.data

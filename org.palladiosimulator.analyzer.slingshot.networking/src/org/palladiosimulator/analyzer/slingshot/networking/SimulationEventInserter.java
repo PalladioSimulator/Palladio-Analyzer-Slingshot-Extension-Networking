@@ -7,8 +7,8 @@ import org.palladiosimulator.analyzer.slingshot.core.extension.SimulationBehavio
 import org.palladiosimulator.analyzer.slingshot.eventdriver.annotations.Subscribe;
 import org.palladiosimulator.analyzer.slingshot.eventdriver.annotations.eventcontract.OnEvent;
 import org.palladiosimulator.analyzer.slingshot.eventdriver.returntypes.Result;
-import org.palladiosimulator.analyzer.slingshot.networking.events.PollSimulationEventEvent;
-import org.palladiosimulator.analyzer.slingshot.networking.util.SimulationEventBuffer;
+import org.palladiosimulator.analyzer.slingshot.networking.data.PollSimulationEventEvent;
+import org.palladiosimulator.analyzer.slingshot.networking.data.SimulationEventBuffer;
 
 
 @OnEvent(when = PollSimulationEventEvent.class)

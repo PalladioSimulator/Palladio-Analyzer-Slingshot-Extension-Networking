@@ -7,7 +7,7 @@ import org.palladiosimulator.analyzer.slingshot.core.extension.SystemBehaviorExt
 import org.palladiosimulator.analyzer.slingshot.eventdriver.annotations.Subscribe;
 import org.palladiosimulator.analyzer.slingshot.eventdriver.annotations.eventcontract.OnEvent;
 import org.palladiosimulator.analyzer.slingshot.networking.SlingshotWebsocketClient;
-import org.palladiosimulator.analyzer.slingshot.networking.events.EventMessage;
+import org.palladiosimulator.analyzer.slingshot.networking.data.EventMessage;
 
 
 
@@ -15,12 +15,12 @@ import org.palladiosimulator.analyzer.slingshot.networking.events.EventMessage;
 @OnEvent(when = EventMessage.class)
 public class EventMessageDispatcher implements SystemBehaviorExtension {
 	private static final Logger LOGGER = Logger.getLogger(SlingshotWebsocketClient.class.getName());
-	
+
 	@Inject
-	private SlingshotWebsocketClient client;
-	
+	private SlingshotWebsocketClient client; // make it nullable and only active, if connection is available.
+
 	@Subscribe
-	public void onEventMessage(EventMessage<?> message) {
+	public void onEventMessage(final EventMessage<?> message) {
 		if(message.getCreator() == "Explorer") {
 			client.sendMessage(message);
 		} else {
@@ -28,5 +28,5 @@ public class EventMessageDispatcher implements SystemBehaviorExtension {
 			LOGGER.info("No dispatch because not an explorer message: " + message);
 		}
 	}
-	
+
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import org.palladiosimulator.analyzer.slingshot.networking.events.Message;
+import org.palladiosimulator.analyzer.slingshot.networking.data.Message;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,12 +18,12 @@ import com.google.gson.JsonParseException;
 
 @Singleton
 public class GsonProvider {
-	private Map<Type, Object> gsonAdapters;
-	private Map<String, Class<? extends Message<?>>> messageTypes;
-	private Gson gson;
+	private final Map<Type, Object> gsonAdapters;
+	private final Map<String, Class<? extends Message<?>>> messageTypes;
+	private final Gson gson;
 	
 	@Inject
-	public GsonProvider(Map<Type, Object> gsonAdapters, Map<String, Class<? extends Message<?>>> messageTypes) {
+	public GsonProvider(final Map<Type, Object> gsonAdapters, final Map<String, Class<? extends Message<?>>> messageTypes) {
 		this.gsonAdapters = gsonAdapters;
 		this.messageTypes = messageTypes;
 		this.gson = createGson();
@@ -34,23 +34,23 @@ public class GsonProvider {
 	}
 	
     private Gson createGson() {
-        GsonBuilder builder = new GsonBuilder();
+        final GsonBuilder builder = new GsonBuilder();
 		
         // Register Type Adapters
 		this.gsonAdapters.forEach((type, adapter) -> {
-			(adapter instanceof List<?> adapterList ? adapterList : List.of(adapter)).forEach(a -> builder.registerTypeAdapter(type, a));
+			(adapter instanceof final List<?> adapterList ? adapterList : List.of(adapter)).forEach(a -> builder.registerTypeAdapter(type, a));
 		});
 
 		
 		// Register Adapter that maps messages to the correct type
 		builder.registerTypeAdapter(Message.class, new JsonDeserializer<Message<?>>() {
 			@Override
-			public Message<?> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+			public Message<?> deserialize(final JsonElement json, final Type typeOfT, final JsonDeserializationContext context)
 					throws JsonParseException {
 				if(json.isJsonObject()) {
-					var event = json.getAsJsonObject().get("event");
+					final var event = json.getAsJsonObject().get("event");
 					if(event != null) {
-						var eventString = event.getAsString();
+						final var eventString = event.getAsString();
 						if(messageTypes.containsKey(eventString)) {
 							return context.deserialize(json, messageTypes.get(eventString));
 						} else {
