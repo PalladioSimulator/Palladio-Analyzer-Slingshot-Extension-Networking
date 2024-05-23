@@ -16,7 +16,6 @@ import org.palladiosimulator.analyzer.slingshot.core.api.SimulationDriver;
 import org.palladiosimulator.analyzer.slingshot.core.api.SystemDriver;
 import org.palladiosimulator.analyzer.slingshot.networking.data.Message;
 import org.palladiosimulator.analyzer.slingshot.networking.data.SimulationEventBuffer;
-import org.palladiosimulator.analyzer.slingshot.stateexploration.explorer.networking.messages.TestMessage;
 
 
 @Singleton
@@ -106,9 +105,6 @@ public class SlingshotWebsocketClient extends WebSocketClient {
 		} catch(final Throwable e) {
 			System.out.println("Error on deserializing message. No event was dispatched" + e);
 			LOGGER.error("Error on deserializing message. No event was dispatched", e);
-		}
-		if (arg.contains("ResetSystem")) {
-			getSystemDriver().postEvent(new TestMessage("ManuallTest"));
 		}
 	}
 
