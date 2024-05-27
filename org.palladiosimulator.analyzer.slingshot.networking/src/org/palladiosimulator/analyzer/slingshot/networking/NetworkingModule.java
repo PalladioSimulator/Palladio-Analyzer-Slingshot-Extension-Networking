@@ -1,17 +1,29 @@
 package org.palladiosimulator.analyzer.slingshot.networking;
 
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.palladiosimulator.analyzer.slingshot.core.extension.AbstractSlingshotExtension;
+import org.palladiosimulator.analyzer.slingshot.networking.data.Message;
 import org.palladiosimulator.analyzer.slingshot.networking.data.SimulationEventBuffer;
 import org.palladiosimulator.analyzer.slingshot.networking.util.EventMessageDispatcher;
 import org.palladiosimulator.analyzer.slingshot.networking.util.GsonProvider;
+
+import com.google.inject.TypeLiteral;
+import com.google.inject.multibindings.MapBinder;
 
 public class NetworkingModule extends AbstractSlingshotExtension {
 
 	@Override
 	protected void configure() {
+
+
+		// provide default map
+		MapBinder.newMapBinder(binder(), new TypeLiteral<String>() {}, new TypeLiteral<Class<? extends Message<?>>>() {});
+		MapBinder.newMapBinder(binder(), Type.class, Object.class);
+
+
 		bind(GsonProvider.class);
 		try {
 			final var client = new SlingshotWebsocketClient(new URI("ws://localhost:9006"));
