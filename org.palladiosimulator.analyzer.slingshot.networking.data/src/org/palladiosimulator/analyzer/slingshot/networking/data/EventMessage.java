@@ -1,4 +1,4 @@
-package org.palladiosimulator.analyzer.slingshot.networking.events;
+package org.palladiosimulator.analyzer.slingshot.networking.data;
 
 import java.util.UUID;
 
@@ -12,12 +12,12 @@ import org.palladiosimulator.analyzer.slingshot.common.events.SystemEvent;
  */
 public abstract class EventMessage<T> extends Message<T> implements SystemEvent {
 	private final UUID id = UUID.randomUUID();
-	
-	public EventMessage(String event, T payload) {
+
+	public EventMessage(final String event, final T payload) {
 		super(event, payload, "Explorer");
 	}
-	
-	public EventMessage(String event, T payload, String creator) {
+
+	public EventMessage(final String event, final T payload, final String creator) {
 		super(event, payload, creator);
 	}
 

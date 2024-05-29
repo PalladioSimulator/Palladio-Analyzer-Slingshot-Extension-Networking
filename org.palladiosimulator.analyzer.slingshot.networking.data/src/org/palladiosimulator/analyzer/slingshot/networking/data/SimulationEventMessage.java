@@ -1,19 +1,19 @@
-package org.palladiosimulator.analyzer.slingshot.networking.events;
+package org.palladiosimulator.analyzer.slingshot.networking.data;
 
 import java.util.UUID;
 
 import org.palladiosimulator.analyzer.slingshot.common.events.DESEvent;
 
 public abstract class SimulationEventMessage<T> extends Message<T> implements DESEvent {
-	private String eventId = UUID.randomUUID().toString();
+	private final String eventId = UUID.randomUUID().toString();
 	private double time;
 	
 	
-	public SimulationEventMessage(String event, T payload) {
+	public SimulationEventMessage(final String event, final T payload) {
 		super(event, payload, "Explorer");
 	}
 	
-	public SimulationEventMessage(String event, T payload, String creator) {
+	public SimulationEventMessage(final String event, final T payload, final String creator) {
 		super(event, payload, creator);
 	}
 
@@ -33,7 +33,7 @@ public abstract class SimulationEventMessage<T> extends Message<T> implements DE
 	}
 
 	@Override
-	public void setTime(double time) {
+	public void setTime(final double time) {
 		this.time = time;
 		
 	}

@@ -1,4 +1,4 @@
-package org.palladiosimulator.analyzer.slingshot.networking.util;
+package org.palladiosimulator.analyzer.slingshot.networking.data;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -9,9 +9,9 @@ import org.palladiosimulator.analyzer.slingshot.common.events.DESEvent;
 
 @Singleton
 public class SimulationEventBuffer {
-	private Queue<DESEvent> queue = new ConcurrentLinkedQueue<>();
+	private final Queue<DESEvent> queue = new ConcurrentLinkedQueue<>();
 
-	public void addMessage(DESEvent message) {
+	public void addMessage(final DESEvent message) {
 		queue.add(message);
 	}
 	
