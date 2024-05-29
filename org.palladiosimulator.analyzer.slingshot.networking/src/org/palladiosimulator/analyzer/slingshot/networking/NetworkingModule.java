@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.palladiosimulator.analyzer.slingshot.core.extension.AbstractSlingshotExtension;
+import org.palladiosimulator.analyzer.slingshot.networking.data.GreetingMessage;
 import org.palladiosimulator.analyzer.slingshot.networking.data.Message;
 import org.palladiosimulator.analyzer.slingshot.networking.data.SimulationEventBuffer;
 import org.palladiosimulator.analyzer.slingshot.networking.util.EventMessageDispatcher;
@@ -18,11 +19,10 @@ public class NetworkingModule extends AbstractSlingshotExtension {
 	@Override
 	protected void configure() {
 
-
-		// provide default map
-		MapBinder.newMapBinder(binder(), new TypeLiteral<String>() {}, new TypeLiteral<Class<? extends Message<?>>>() {});
+		MapBinder.newMapBinder(binder(), new TypeLiteral<String>() {}, new TypeLiteral<Class<? extends Message<?>>>() {})
+		.addBinding(GreetingMessage.MESSAGE_MAPPING_IDENTIFIER).toInstance(GreetingMessage.class);
+		
 		MapBinder.newMapBinder(binder(), Type.class, Object.class);
-
 
 		bind(GsonProvider.class);
 		try {

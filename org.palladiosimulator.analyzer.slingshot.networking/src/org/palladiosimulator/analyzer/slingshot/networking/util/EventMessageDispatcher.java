@@ -9,28 +9,32 @@ import org.palladiosimulator.analyzer.slingshot.eventdriver.annotations.Subscrib
 import org.palladiosimulator.analyzer.slingshot.eventdriver.annotations.eventcontract.OnEvent;
 import org.palladiosimulator.analyzer.slingshot.networking.SlingshotWebsocketClient;
 import org.palladiosimulator.analyzer.slingshot.networking.data.EventMessage;
+import org.palladiosimulator.analyzer.slingshot.networking.data.GreetingMessage;
 import org.palladiosimulator.analyzer.slingshot.networking.data.NetworkingConstants;
-
 
 @OnEvent(when = EventMessage.class)
 public class EventMessageDispatcher implements SystemBehaviorExtension {
 	private static final Logger LOGGER = Logger.getLogger(SlingshotWebsocketClient.class.getName());
 
-	@Inject
-	private SlingshotWebsocketClient client;
+	private final SlingshotWebsocketClient client;
+
+	private final String clientName;
 
 	@Inject
-	@Named(NetworkingConstants.CLIENT_NAME)
-	private String clientName;
+	public EventMessageDispatcher(final SlingshotWebsocketClient client,
+			@Named(NetworkingConstants.CLIENT_NAME) final String clientName) {
+		this.client = client;
+		this.clientName = clientName;
+		client.sendMessage(new GreetingMessage(clientName));
+	}
 
 	@Subscribe
 	public void onEventMessage(final EventMessage<?> message) {
 		if (message.getCreator() == clientName) {
 			client.sendMessage(message);
 		} else {
-			LOGGER.info(String.format(
-					"No dispatch because message creator is %s, but this client is %s.", message.getCreator(),
-					this.clientName));
+			LOGGER.info(String.format("No dispatch because message creator is %s, but this client is %s.",
+					message.getCreator(), this.clientName));
 		}
 	}
 }
