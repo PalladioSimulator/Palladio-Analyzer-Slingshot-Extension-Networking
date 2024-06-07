@@ -9,6 +9,6 @@ Require-Bundle: org.palladiosimulator.analyzer.slingshot.networking;bundle-versi
  org.palladiosimulator.analyzer.slingshot.networking.data;bundle-version="1.0.0",
  com.google.gson,
  org.palladiosimulator.analyzer.slingshot.core,
- org.palladiosimulator.spd,
- org.palladiosimulator.analyzer.slingshot.workflow.events
+ org.palladiosimulator.analyzer.slingshot.workflow.events,
+ org.palladiosimulator.spd
 Import-Package: javax.inject

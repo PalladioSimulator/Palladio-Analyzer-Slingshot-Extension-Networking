@@ -32,19 +32,16 @@ public class TestModule extends AbstractSlingshotExtension {
 			@Override
 			public JsonElement serialize(final ScalingPolicy src, final Type typeOfSrc, final JsonSerializationContext context) {
 				final JsonObject jsonScalingPolicy = new JsonObject();
-
 				jsonScalingPolicy.addProperty("id", src.getId());
-				jsonScalingPolicy.addProperty("name", src.getEntityName());
-				// jsonScalingPolicy.addProperty("uri", src.eResource().getURI().toString());
-
 				return jsonScalingPolicy;
 			}
 		});
 
 		
 //		install(DeserializerTest.class);
-
-		install(Test.class);
+//		install(Test.class);
+		
+		install(TestPlanInjection.class);
 		
 		
 		

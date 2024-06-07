@@ -7,6 +7,13 @@ import org.palladiosimulator.analyzer.slingshot.eventdriver.annotations.Subscrib
 import org.palladiosimulator.analyzer.slingshot.eventdriver.annotations.eventcontract.OnEvent;
 import org.palladiosimulator.analyzer.slingshot.workflow.events.WorkflowLaunchConfigurationBuilderInitialized;
 
+/**
+ * 
+ * To avoid exceptions on workflow creation due to missing models
+ * 
+ * @author Sarah Stieß
+ *
+ */
 @OnEvent(when = WorkflowLaunchConfigurationBuilderInitialized.class)
 public class ConfigurationFixes implements SystemBehaviorExtension {
 
