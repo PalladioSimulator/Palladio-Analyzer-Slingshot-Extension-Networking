@@ -7,7 +7,7 @@ import javax.inject.Named;
 import org.palladiosimulator.analyzer.slingshot.core.extension.AbstractSlingshotExtension;
 import org.palladiosimulator.analyzer.slingshot.networking.data.Message;
 import org.palladiosimulator.analyzer.slingshot.networking.data.NetworkingConstants;
-import org.palladiosimulator.analyzer.slingshot.networking.test.injection.ApplyPolicyEventMessage;
+import org.palladiosimulator.analyzer.slingshot.networking.test.messages.ManagedSystemTimeEventMessage;
 import org.palladiosimulator.spd.ScalingPolicy;
 
 import com.google.gson.JsonElement;
@@ -25,6 +25,10 @@ public class TestModule extends AbstractSlingshotExtension {
 		
 		install(ConfigurationFixes.class);
 
+        final var messageBinder = MapBinder.newMapBinder(binder(), new TypeLiteral<String>() {}, new TypeLiteral<Class<? extends Message<?>>>() {});
+
+        messageBinder.addBinding(ManagedSystemTimeEventMessage.MESSAGE_MAPPING_IDENTIFIER)
+            .toInstance(ManagedSystemTimeEventMessage.class);
 		
 		final var gsonBinder = MapBinder.newMapBinder(binder(), Type.class, Object.class);
 
