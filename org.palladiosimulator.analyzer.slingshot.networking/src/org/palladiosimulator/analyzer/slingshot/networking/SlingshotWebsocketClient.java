@@ -103,8 +103,9 @@ public class SlingshotWebsocketClient extends WebSocketClient {
 				LOGGER.warn("Received Message could not be dispatched, as it is not a EventMessage (Or SystemEvent): " + message);
 			}
 		} catch(final Throwable e) {
-			System.out.println("Error on deserializing message. No event was dispatched" + e);
-			LOGGER.error("Error on deserializing message. No event was dispatched", e);
+            System.out.println("Error on deserializing message. No event was dispatched.");
+            e.printStackTrace();
+            LOGGER.error("Error on deserializing message. No event was dispatched ", e);
 		}
 	}
 

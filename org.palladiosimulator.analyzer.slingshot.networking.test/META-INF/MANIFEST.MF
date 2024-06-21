@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.palladiosimulator.analyzer.slingshot.networking.test;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: org.palladiosimulator.analyzer.slingshot.networking.test
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Require-Bundle: org.palladiosimulator.analyzer.slingshot.networking;bundle-version="1.0.0",
+ org.palladiosimulator.analyzer.slingshot.networking.data;bundle-version="1.0.0",
+ com.google.gson,
+ org.palladiosimulator.analyzer.slingshot.core,
+ org.palladiosimulator.analyzer.slingshot.workflow.events,
+ org.palladiosimulator.spd
+Import-Package: javax.inject
