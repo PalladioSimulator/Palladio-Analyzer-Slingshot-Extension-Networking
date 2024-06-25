@@ -9,13 +9,11 @@ import javax.inject.Singleton;
 import org.apache.log4j.Logger;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
-import org.palladiosimulator.analyzer.slingshot.common.events.DESEvent;
 import org.palladiosimulator.analyzer.slingshot.common.events.SystemEvent;
 import org.palladiosimulator.analyzer.slingshot.core.Slingshot;
 import org.palladiosimulator.analyzer.slingshot.core.api.SimulationDriver;
 import org.palladiosimulator.analyzer.slingshot.core.api.SystemDriver;
 import org.palladiosimulator.analyzer.slingshot.networking.data.Message;
-import org.palladiosimulator.analyzer.slingshot.networking.data.SimulationEventBuffer;
 import org.palladiosimulator.analyzer.slingshot.networking.util.GsonProvider;
 
 
@@ -28,8 +26,7 @@ public class SlingshotWebsocketClient extends WebSocketClient {
 	private final ConcurrentLinkedQueue<String> messageQueue = new ConcurrentLinkedQueue<>();
 	@Inject
 	private GsonProvider gsonProvider;
-	@Inject
-	private SimulationEventBuffer simulationEventBuffer;
+
 	final Object lock = new Object();
 	private final Thread reconnectionThread = new Thread(() -> {
 		if(this.isOpen()) {
@@ -96,8 +93,6 @@ public class SlingshotWebsocketClient extends WebSocketClient {
 			System.out.println(message.getClass());
 			if(message instanceof final SystemEvent eventMessage) {
 				getSystemDriver().postEvent(eventMessage);
-			} else if (message instanceof final DESEvent eventMessage) {
-				this.simulationEventBuffer.addMessage(eventMessage);
 			} else {
 				System.out.println("Received Message could not be dispatched, as it is not a EventMessage (Or SystemEvent): " + message);
 				LOGGER.warn("Received Message could not be dispatched, as it is not a EventMessage (Or SystemEvent): " + message);

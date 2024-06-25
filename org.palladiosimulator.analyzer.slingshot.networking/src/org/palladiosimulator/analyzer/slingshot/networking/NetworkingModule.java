@@ -7,7 +7,6 @@ import java.net.URISyntaxException;
 import org.palladiosimulator.analyzer.slingshot.core.extension.AbstractSlingshotExtension;
 import org.palladiosimulator.analyzer.slingshot.networking.data.GreetingMessage;
 import org.palladiosimulator.analyzer.slingshot.networking.data.Message;
-import org.palladiosimulator.analyzer.slingshot.networking.data.SimulationEventBuffer;
 import org.palladiosimulator.analyzer.slingshot.networking.util.EventMessageDispatcher;
 import org.palladiosimulator.analyzer.slingshot.networking.util.GsonProvider;
 
@@ -33,8 +32,6 @@ public class NetworkingModule extends AbstractSlingshotExtension {
 			e.printStackTrace();
 		}
 		install(EventMessageDispatcher.class);
-		bind(SimulationEventBuffer.class);
-		install(SimulationEventInserter.class);
 	}
 
 }
