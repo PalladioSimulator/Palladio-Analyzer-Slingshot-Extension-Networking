@@ -25,7 +25,7 @@ public class NetworkingModule extends AbstractSlingshotExtension {
 
 		bind(GsonProvider.class);
 		try {
-			final var client = new SlingshotWebsocketClient(new URI("ws://localhost:9006"));
+			final var client = new SlingshotWebsocketClient(new URI("ws://localhost:8080/ws"));
 			bind(SlingshotWebsocketClient.class).toInstance(client);
 			this.requestInjection(client);
 		} catch (final URISyntaxException e) {
