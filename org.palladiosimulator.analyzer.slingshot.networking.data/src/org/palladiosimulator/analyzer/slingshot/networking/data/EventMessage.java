@@ -17,7 +17,7 @@ public abstract class EventMessage<T> extends Message<T> implements SystemEvent 
 	// Copy as non static to allow serialization
 	private final UUID clientId;
 	private final UUID explorationId;
-	
+
 
 	public EventMessage(final String event, final T payload) {
 		super(event, payload, "Explorer");
@@ -41,4 +41,7 @@ public abstract class EventMessage<T> extends Message<T> implements SystemEvent 
 		return getEvent();
 	}
 
+    public UUID getExplorationId() {
+        return this.explorationId;
+    }
 }
