@@ -11,8 +11,16 @@ import org.palladiosimulator.analyzer.slingshot.common.events.SystemEvent;
  * @param <T> Payload type
  */
 public abstract class EventMessage<T> extends Message<T> implements SystemEvent {
-	private static final UUID CLIENT_ID = UUID.randomUUID();
-	public static UUID EXPLORATION_ID;
+    /*
+     * maybe overwritten manually when starting the managed system via experiment automation. preset
+     * for state exploration.
+     */
+	public static UUID CLIENT_ID = UUID.randomUUID();
+
+    /*
+     * will be overwritten manually when starting a state exploration. preset for managed system.
+     */
+	public static UUID EXPLORATION_ID = UUID.randomUUID();
 	private final UUID id = UUID.randomUUID();
 	// Copy as non static to allow serialization
 	private final UUID clientId;
