@@ -3,8 +3,8 @@ package org.palladiosimulator.analyzer.slingshot.networking;
 import java.net.URI;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 import org.apache.log4j.Logger;
 import org.java_websocket.client.WebSocketClient;

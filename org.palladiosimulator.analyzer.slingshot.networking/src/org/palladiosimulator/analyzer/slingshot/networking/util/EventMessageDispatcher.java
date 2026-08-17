@@ -1,7 +1,7 @@
 package org.palladiosimulator.analyzer.slingshot.networking.util;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import org.apache.log4j.Logger;
 import org.palladiosimulator.analyzer.slingshot.core.extension.SystemBehaviorExtension;
