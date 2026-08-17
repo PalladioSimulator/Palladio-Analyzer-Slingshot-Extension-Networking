@@ -4,7 +4,7 @@ Bundle-Name: Networking
 Bundle-SymbolicName: org.palladiosimulator.analyzer.slingshot.networking;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: Networking
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.slf4j.api;bundle-version="1.7.30",
  com.google.gson;bundle-version="2.8.8",
  org.palladiosimulator.analyzer.slingshot.core,
