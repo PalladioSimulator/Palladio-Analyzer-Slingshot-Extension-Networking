@@ -4,7 +4,7 @@ Bundle-Name: org.palladiosimulator.analyzer.slingshot.networking.data
 Bundle-SymbolicName: org.palladiosimulator.analyzer.slingshot.networking.data
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: org.palladiosimulator.analyzer.slingshot.networking.data
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.palladiosimulator.analyzer.slingshot.common,
- javax.inject
+ jakarta.inject.jakarta.inject-api;bundle-version="[2.0.0,3.0.0)"
 Export-Package: org.palladiosimulator.analyzer.slingshot.networking.data
